@@ -1,0 +1,54 @@
+<mat-form-field style="width: 100%" >
+  <mat-label>search</mat-label>
+  <input matInput placeholder="Ex. post id" [(ngModel)]="searchId" (keyup.enter)="loadData()" >
+</mat-form-field>
+<hr>
+
+<form [formGroup]="form" (ngSubmit)="updateData()">
+  <div class="container">
+    <div class="row">
+      <!--    <div class="col12">-->
+      <!--      <mat-form-field class="full-width">-->
+      <!--        <mat-label>Favorite food</mat-label>-->
+      <!--        <input matInput placeholder="Ex. 1" >-->
+      <!--      </mat-form-field>-->
+
+
+      <!--    </div>-->
+      <div class="col12">
+        <mat-form-field class="full-width">
+          <mat-label>id</mat-label>
+          <input formControlName="id" matInput placeholder="Ex. 1">
+        </mat-form-field>
+
+      </div>
+      <div class="col12">
+
+        <mat-form-field class="full-width">
+          <mat-label>user Id</mat-label>
+          <input formControlName="userId" matInput placeholder="Ex. 1">
+        </mat-form-field>
+      </div>
+      <div class="col12">
+        <mat-form-field class="full-width">
+          <mat-label>title</mat-label>
+          <input formControlName="title" matInput placeholder="Ex. 1">
+        </mat-form-field>
+
+      </div>
+
+      <div class="col12">
+        <mat-form-field class="full-width">
+          <mat-label>Body</mat-label>
+          <textarea formControlName="body" matInput placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col12">
+        <button [disabled]="form.invalid"  mat-raised-button color="primary" type="submit">Save data</button>
+      </div>
+
+    </div>
+  </div>
+</form>
+
