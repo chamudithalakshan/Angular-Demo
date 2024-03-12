@@ -13,5 +13,12 @@ import {RouterOutlet} from "@angular/router";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  //One way data binding
+name :string= "home component"
 
+  //event data binding
+
+  saveData(value:string) {
+console.log(value)
+  }
 }

@@ -1,2 +1,6 @@
 <app-navbar></app-navbar>
+<h1>hello im {{name}}</h1>
 
+<input name="textS" id="testInput" type="text" #myvar>
+
+<button (click)="saveData(myvar.value)">save</button>
