@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
+import {PostService} from "../services/post.service";
 
 @Component({
   selector: 'app-delete',
@@ -15,12 +16,12 @@ import {MatIcon} from "@angular/material/icon";
   templateUrl: './delete.component.html',
   styleUrl: './delete.component.css'
 })
-export class DeleteComponent {
+export class DeleteComponent implements OnInit{
   list:Array<any>=[]
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private postService:PostService) {
   }
   ngOnInit() {
-    this.http.get<any>('https://jsonplaceholder.typicode.com/posts').subscribe(reponse=>{
+    this.postService.findAll().subscribe(reponse=>{
       console.log(reponse)
       this.list=reponse;
       console.log(this.list)
@@ -30,7 +31,7 @@ export class DeleteComponent {
 
     if (confirm('are you sure '+id)){
 
-      this.http.delete<any>('https://jsonplaceholder.typicode.com/posts/'+id).subscribe(reponse=>{
+      this.postService.delete(id).subscribe(reponse=>{
         console.log(reponse)
         if (reponse){
           alert("deleted")

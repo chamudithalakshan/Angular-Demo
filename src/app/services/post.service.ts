@@ -32,7 +32,7 @@ export class PostService {
   }
 
   update(id:any,userId:any,title:any,body:any):Observable<any>{
-    return  this.http.post <any>('https://jsonplaceholder.typicode.com/posts'+id,{
+    return  this.http.put <any>('https://jsonplaceholder.typicode.com/posts'+id,{
       id,
       userId,
       title,

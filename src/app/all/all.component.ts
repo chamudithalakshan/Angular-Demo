@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {NgForOf} from "@angular/common";
+import {PostService} from "../services/post.service";
 
 @Component({
   selector: 'app-all',
@@ -12,14 +13,15 @@ import {NgForOf} from "@angular/common";
   styleUrl: './all.component.css'
 })
 export class AllComponent implements OnInit{
-  list:Array<any>=[]
-constructor(private http:HttpClient) {
-}
-  ngOnInit()  {
-  this.http.get<any>('https://jsonplaceholder.typicode.com/posts').subscribe(reponse=>{
-    console.log(reponse)
-    this.list=reponse;
-    console.log(this.list)
-  })
+  list: Array<any> = [];
+
+  constructor(private http: HttpClient, private postService: PostService) {}
+
+  ngOnInit() {
+    this.postService.findAll().subscribe(response => {
+      console.log(response);
+      this.list = response;
+      console.log(this.list);
+    });
   }
 }

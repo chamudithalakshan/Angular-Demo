@@ -5,6 +5,7 @@ import {MatButton, MatButtonModule} from "@angular/material/button";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {PostService} from "../services/post.service";
 
 @Component({
   selector: 'app-new',
@@ -19,7 +20,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrl: './new.component.css'
 })
 export class NewComponent {
-  constructor(private http:HttpClient,_snackBar: MatSnackBar) {
+  constructor(private http:HttpClient,_snackBar: MatSnackBar,private postService:PostService) {
   }
 form =new FormGroup({
   id:new FormControl('',Validators.required),
@@ -29,13 +30,13 @@ form =new FormGroup({
 })
   createData(){
     console.log(this.form)
-    this.http.post <any>('https://jsonplaceholder.typicode.com/posts',{
-      id:this.form.get('id')?.value,
-      userId:this.form.get('userId')?.value,
-      title:this.form.get('title')?.value,
-      body:this.form.get('body')?.value
+    this.postService.create (
+      this.form.get('id')?.value,
+      this.form.get('userId')?.value,
+      this.form.get('title')?.value,
+      this.form.get('body')?.value
 
-    }).subscribe(reponse=>{
+    ).subscribe(reponse=>{
       console.log(reponse)
       if (reponse){
       alert("saved")

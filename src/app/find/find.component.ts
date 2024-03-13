@@ -4,6 +4,7 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {NgForOf} from "@angular/common";
+import {PostService} from "../services/post.service";
 
 @Component({
   selector: 'app-find',
@@ -20,11 +21,11 @@ import {NgForOf} from "@angular/common";
 export class FindComponent {
 searchId='';
   list:Array<any>=[]
-constructor(private http:HttpClient) {
+constructor(private http:HttpClient,private postService:PostService) {
 }
   loadData(){
 
-    this.http.get<any>('https://jsonplaceholder.typicode.com/posts?id='+this.searchId).subscribe(reponse=>{
+    this.postService.find(this.searchId).subscribe(reponse=>{
       console.log(reponse)
       this.list=reponse;
       console.log(this.list)

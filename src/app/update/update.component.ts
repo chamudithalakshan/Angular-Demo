@@ -5,6 +5,7 @@ import {MatInput} from "@angular/material/input";
 import {HttpClient} from "@angular/common/http";
 import {MatButton} from "@angular/material/button";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {PostService} from "../services/post.service";
 
 @Component({
   selector: 'app-update',
@@ -23,7 +24,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class UpdateComponent {
   searchId='';
 
-  constructor(private http:HttpClient,_snackBar: MatSnackBar) {
+  constructor(private http:HttpClient,_snackBar: MatSnackBar,private postService:PostService) {
   }
   form =new FormGroup({
     id:new FormControl('',Validators.required),
@@ -33,13 +34,13 @@ export class UpdateComponent {
   })
   updateData(){
     console.log(this.form)
-    this.http.put <any>('https://jsonplaceholder.typicode.com/posts/'+this.searchId,{
-      id:this.form.get('id')?.value,
-      userId:this.form.get('userId')?.value,
-      title:this.form.get('title')?.value,
-      body:this.form.get('body')?.value
+    this.postService.update (
+      this.form.get('id')?.value,
+      this.form.get('userId')?.value,
+      this.form.get('title')?.value,
+      this.form.get('body')?.value
 
-    }).subscribe(reponse=>{
+    ).subscribe(reponse=>{
       console.log(reponse)
       if (reponse){
         alert("updated")
@@ -49,7 +50,7 @@ export class UpdateComponent {
   }
   loadData(){
 
-    this.http.get<any>('https://jsonplaceholder.typicode.com/posts?id='+this.searchId).subscribe(reponse=>{
+    this.postService.find(this.searchId).subscribe(reponse=>{
       this.form.patchValue({
         id:reponse[0].id,
         userId:reponse[0].userId,

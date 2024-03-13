@@ -10,16 +10,20 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {PostService} from "./services/post.service";
+import {LoadingComponent} from "./loading/loading.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HousingListComponent, NavbarComponent, RouterLink, RouterLinkActive, HomeComponent, CommonModule, ReactiveFormsModule, DatePipe, FormsModule, MatButton,HttpClientModule,MatSnackBarModule,HttpClientModule],
+  imports: [RouterOutlet, HousingListComponent, NavbarComponent, RouterLink, RouterLinkActive, HomeComponent, CommonModule, ReactiveFormsModule, DatePipe, FormsModule, MatButton, HttpClientModule, MatSnackBarModule, LoadingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
+
   birthday = new Date();
   title = 'my-app';
   registrationForm = new FormGroup({
